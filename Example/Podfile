@@ -1,0 +1,14 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'AMKRouter_Example' do
+  pod 'AMKRouter', :path => '../'
+  pod 'AMKLocaleDescription'
+  
+  target 'AMKRouter_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
