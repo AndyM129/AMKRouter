@@ -39,11 +39,3 @@ NSString * const AMKDemoTargetName = @"Demo";
 }
 
 @end
-
-//[_dataSource addObject:[[AMKTargetActionModel alloc] initWithTitle:@"Goto ViewController（页面跳转）" targetName:@"Demo" actionName:@"gotoViewControllerWithParams:" params:@{} shouldCache:YES]];
-//[_dataSource addObject:[[AMKTargetActionModel alloc] initWithTitle:@"Alert Without Params (分发没有参数的Action)" targetName:@"Demo" actionName:@"alertWithoutParams" params:@{} shouldCache:YES]];
-//[_dataSource addObject:[[AMKTargetActionModel alloc] initWithTitle:@"Alert Dispatcher Result (返回对象)" targetName:@"Demo" actionName:@"alertDispatcherResult:" params:@{@"text":@"andy test"} shouldCache:YES]];
-//[_dataSource addObject:[[AMKTargetActionModel alloc] initWithTitle:@"Alert Dispatcher Result (返回基础数据类型)" targetName:@"Demo" actionName:@"alertDispatcherResult2:" params:nil shouldCache:YES]];
-//[_dataSource addObject:[[AMKTargetActionModel alloc] initWithTitle:@"Action Forward（未识别方法）" targetName:@"Demo" actionName:@"xxxxx" params:@{} shouldCache:YES]];
-//[_dataSource addObject:[[AMKTargetActionModel alloc] initWithTitle:@"Target Forward（未识别Target）" targetName:@"XXX" actionName:@"gotoViewControllerWithParams:" params:@{} shouldCache:YES]];
-//[_dataSource addObject:[[AMKTargetActionModel alloc] initWithTitle:@"Target&Action Forward（未识别Target和Action）" targetName:@"XXX" actionName:@"xxxxxxx" params:@{} shouldCache:YES]];
