@@ -413,7 +413,7 @@
 
 #pragma mark -
 
-NSString * _Nonnull const AMKRouterErrorDomain = @"com.baidu.amk.router.error";
+NSString * _Nonnull const AMKRouterErrorDomain = @"com.andy.amkits.router.error";
 
 AMKRouterErrorCode AMKRouterSuccessErrorCode = 0;                               //!< 路由错误状态码：成功
 AMKRouterErrorCode AMKRouterInvalidPatternErrorCode = 1;                        //!< 路由错误状态码：路由规则不合法

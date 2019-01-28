@@ -193,7 +193,7 @@ id object = [AMKRouter performRouterUrl:router paramsBlock:nil errorBlock:nil];
 
 ## Author
 
-AndyM129, mengxinxin@baidu.com
+AndyM129, andy_m129@163.com
 
 ## License
 
