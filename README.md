@@ -115,9 +115,9 @@ NSString * const AMKDemoTargetName = @"Demo";
 ```objective-c
 // 示例路由
 NSMutableDictionary *dataSource = [NSMutableDictionary dictionary];
-        dataSource[@"amkits://demo.router.amkits.andy.com/view/safari?url=https%3a%2f%2fgithub.com%2fAndyM129%2fAMKLocaleDescription%2ftree%2fmaster"] = @"前往GitHub查看完整说明 👉";
-        dataSource[@"amkits://demo.router.amkits.andy.com/view/gotoViewController?class=AMKViewController&title=路由跳转示例"] = @"创建并前往指定页面";
-        dataSource[@"amkits://demo.router.amkits.andy.com/view/alert?title=标题&message=弹窗提示文案&cancelTitle=知道啦"] = @"创建并显示弹窗";
+dataSource[@"amkits://demo.router.amkits.andy.com/view/safari?url=https%3a%2f%2fgithub.com%2fAndyM129%2fAMKRouter"] = @"前往GitHub查看完整说明 👉";
+dataSource[@"amkits://demo.router.amkits.andy.com/view/gotoViewController?class=AMKViewController&title=路由跳转示例"] = @"创建并前往指定页面";
+dataSource[@"amkits://demo.router.amkits.andy.com/view/alert?title=标题&message=弹窗提示文案&cancelTitle=知道啦"] = @"创建并显示弹窗";
         
 // 执行(支持返回值及异步回调)
 NSString *router = self.dataSource.allKeys[indexPath.row];

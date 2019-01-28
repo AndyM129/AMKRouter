@@ -26,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (!self.title.length) self.title = @"AMKDispatcher 分发演示";
+    if (!self.title.length) self.title = @"AMKRouter 路由跳转示例";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self.tableView action:@selector(reloadData)];
     [self.view addSubview:self.tableView];
@@ -57,7 +57,7 @@
 - (NSDictionary *)dataSource {
     if (!_dataSource) {
         NSMutableDictionary *dataSource = [NSMutableDictionary dictionary];
-        dataSource[@"amkits://demo.router.amkits.andy.com/view/safari?url=https%3a%2f%2fgithub.com%2fAndyM129%2fAMKLocaleDescription%2ftree%2fmaster"] = @"前往GitHub查看完整说明 👉";
+        dataSource[@"amkits://demo.router.amkits.andy.com/view/safari?url=https%3a%2f%2fgithub.com%2fAndyM129%2fAMKRouter"] = @"前往GitHub查看完整说明 👉";
         dataSource[@"amkits://demo.router.amkits.andy.com/view/gotoViewController?class=AMKViewController&title=路由跳转示例"] = @"创建并前往指定页面";
         dataSource[@"amkits://demo.router.amkits.andy.com/view/alert?title=标题&message=弹窗提示文案&cancelTitle=知道啦"] = @"创建并显示弹窗";
         _dataSource = dataSource;
