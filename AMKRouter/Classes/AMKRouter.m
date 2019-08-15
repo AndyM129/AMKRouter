@@ -48,12 +48,44 @@
 
 #pragma mark - Public Methods
 
+- (NSString *_Nullable)routerUrlWithPath:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {
+    return [self routerUrlWithHost:self.scheme port:nil path:path params:params];
+}
+
++ (NSString *_Nullable)routerUrlWithPath:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {
+    return [[self sharedInstance] routerUrlWithPath:path params:params];
+}
+
+- (NSString *_Nullable)routerUrlWithPath:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock {
+    return [self routerUrlWithHost:self.scheme port:nil path:path paramsBlock:paramsBlock];
+}
+
++ (NSString *_Nullable)routerUrlWithPath:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock {
+    return [[self sharedInstance] routerUrlWithPath:path paramsBlock:paramsBlock];
+}
+
+- (NSString *_Nullable)routerUrlWithPort:(NSString *_Nullable)port path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {
+    return [self routerUrlWithHost:self.scheme port:port path:path params:params];
+}
+
++ (NSString *_Nullable)routerUrlWithPort:(NSString *_Nullable)port path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {
+    return [[self sharedInstance] routerUrlWithPort:port path:path params:params];
+}
+
+- (NSString *_Nullable)routerUrlWithPort:(NSString *_Nullable)port path:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock {
+    return [self routerUrlWithHost:self.scheme port:port path:path paramsBlock:paramsBlock];
+}
+
++ (NSString *_Nullable)routerUrlWithPort:(NSString *_Nullable)port path:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock {
+    return [[self sharedInstance] routerUrlWithPort:port path:path paramsBlock:paramsBlock];
+}
+
 - (NSString *_Nullable)routerUrlWithHost:(NSString *_Nonnull)host port:(NSString *_Nullable)port path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {
     __block NSMutableArray *keyValueStrings = [[NSMutableArray alloc] initWithCapacity:params.count];
     [params enumerateKeysAndObjectsUsingBlock:^(id _Nonnull key, id _Nonnull obj, BOOL * _Nonnull stop) {
         [keyValueStrings addObject:[NSString stringWithFormat:@"%@=%@", key, obj?:@""]];
     }];
-    return [NSString stringWithFormat:@"%@://%@%@%@%@%@%@%@", self.scheme, host?:@"", (port.length?@":":@""), port?:@"", ([path hasPrefix:@"/"]?@"":@"/"), path?:@"", ([path hasSuffix:@"?"]?@"":@"?"), [keyValueStrings componentsJoinedByString:@"&"]];
+    return [NSString stringWithFormat:@"%@://%@%@%@%@%@%@%@", self.scheme, host?:@"", (port.length?@":":@""), port?:@"", ([path hasPrefix:@"/"]?@"":@"/"), path?:@"", ((!keyValueStrings.count||[path hasSuffix:@"?"])?@"":@"?"), [keyValueStrings componentsJoinedByString:@"&"]];
 }
 
 + (NSString *_Nullable)routerUrlWithHost:(NSString *_Nonnull)host port:(NSString *_Nullable)port path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {

@@ -56,10 +56,9 @@
 }
 
 - (NSDictionary<NSString *, NSString *> * _Nullable)amk_paramsForRouteQuery {
-    NSMutableDictionary<NSString *, NSString *> *queryParams = nil;
+    NSMutableDictionary<NSString *, NSString *> *queryParams = [NSMutableDictionary dictionary];
     if (self.length) {
         NSArray *queryComponents = [self componentsSeparatedByString:@"&"];
-        queryParams = [NSMutableDictionary dictionaryWithCapacity:queryComponents.count];
         for (NSString *queryComponent in queryComponents) {
             if (!queryComponent.length) continue;
             

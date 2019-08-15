@@ -29,6 +29,18 @@ typedef void(^_Nullable AMKRouterErrorBlock)(AMKRouter *_Nullable router, NSErro
 /** 调试模式 */
 @property(nonatomic, assign) BOOL debugEnable;
 
+/** 以当前的路由协议，根据参数生成路由地址 */
+- (NSString *_Nullable)routerUrlWithPath:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params;
++ (NSString *_Nullable)routerUrlWithPath:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params;
+- (NSString *_Nullable)routerUrlWithPath:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock;
++ (NSString *_Nullable)routerUrlWithPath:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock;
+
+/** 以当前的路由协议，根据参数生成路由地址 */
+- (NSString *_Nullable)routerUrlWithPort:(NSString *_Nullable)port path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params;
++ (NSString *_Nullable)routerUrlWithPort:(NSString *_Nullable)port path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params;
+- (NSString *_Nullable)routerUrlWithPort:(NSString *_Nullable)port path:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock;
++ (NSString *_Nullable)routerUrlWithPort:(NSString *_Nullable)port path:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock;
+
 /** 根据参数生成路由地址 */
 - (NSString *_Nullable)routerUrlWithHost:(NSString *_Nonnull)host port:(NSString *_Nullable)port path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params;
 + (NSString *_Nullable)routerUrlWithHost:(NSString *_Nonnull)host port:(NSString *_Nullable)port path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params;

@@ -334,17 +334,13 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-AMKRouter_Example/Pods-AMKRouter_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-AMKRouter_Example/Pods-AMKRouter_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AMKDispatcher/AMKDispatcher.framework",
 				"${BUILT_PRODUCTS_DIR}/AMKLocaleDescription/AMKLocaleDescription.framework",
 				"${BUILT_PRODUCTS_DIR}/AMKRouter/AMKRouter.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMKDispatcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMKLocaleDescription.framework",
@@ -352,7 +348,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AMKRouter_Example/Pods-AMKRouter_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AMKRouter_Example/Pods-AMKRouter_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7C113BDF6997B33E2B75EA6D /* [CP] Check Pods Manifest.lock */ = {
