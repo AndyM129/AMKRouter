@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'AMKRouter'
-    s.version          = '0.1.2'
+    s.version          = '0.1.3'
     s.summary          = 'A short description of AMKRouter.'
     s.description      =  <<-DESC
                             A pod of AMKRouter.
@@ -22,7 +22,8 @@ Pod::Spec.new do |s|
         'AMKRouter/Classes/*.{h,m}',
     ]
     s.public_header_files = [
-        'AMKRouter/Classes/AMKRouter.h'
+        'AMKRouter/Classes/AMKRouter.h',    
+        'AMKRouter/Classes/AMKRouter+Utilities.h'
     ]
     s.dependency 'AMKDispatcher'
 end

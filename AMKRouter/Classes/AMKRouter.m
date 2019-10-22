@@ -48,36 +48,20 @@
 
 #pragma mark - Public Methods
 
-- (NSString *_Nullable)routerUrlWithPath:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {
-    return [self routerUrlWithHost:self.scheme port:nil path:path params:params];
+- (NSString *_Nullable)routerUrlWithHost:(NSString *_Nonnull)host path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {
+    return [self routerUrlWithHost:host port:nil path:path params:params];
 }
 
-+ (NSString *_Nullable)routerUrlWithPath:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {
-    return [[self sharedInstance] routerUrlWithPath:path params:params];
++ (NSString *_Nullable)routerUrlWithHost:(NSString *_Nonnull)host path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {
+    return [self.sharedInstance routerUrlWithHost:host path:path params:params];
 }
 
-- (NSString *_Nullable)routerUrlWithPath:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock {
-    return [self routerUrlWithHost:self.scheme port:nil path:path paramsBlock:paramsBlock];
+- (NSString *_Nullable)routerUrlWithHost:(NSString *_Nonnull)host path:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock {
+    return [self routerUrlWithHost:host port:nil path:path paramsBlock:paramsBlock];
 }
 
-+ (NSString *_Nullable)routerUrlWithPath:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock {
-    return [[self sharedInstance] routerUrlWithPath:path paramsBlock:paramsBlock];
-}
-
-- (NSString *_Nullable)routerUrlWithPort:(NSString *_Nullable)port path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {
-    return [self routerUrlWithHost:self.scheme port:port path:path params:params];
-}
-
-+ (NSString *_Nullable)routerUrlWithPort:(NSString *_Nullable)port path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {
-    return [[self sharedInstance] routerUrlWithPort:port path:path params:params];
-}
-
-- (NSString *_Nullable)routerUrlWithPort:(NSString *_Nullable)port path:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock {
-    return [self routerUrlWithHost:self.scheme port:port path:path paramsBlock:paramsBlock];
-}
-
-+ (NSString *_Nullable)routerUrlWithPort:(NSString *_Nullable)port path:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock {
-    return [[self sharedInstance] routerUrlWithPort:port path:path paramsBlock:paramsBlock];
++ (NSString *_Nullable)routerUrlWithHost:(NSString *_Nonnull)host path:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock {
+    return [self.sharedInstance routerUrlWithHost:host path:path paramsBlock:paramsBlock];
 }
 
 - (NSString *_Nullable)routerUrlWithHost:(NSString *_Nonnull)host port:(NSString *_Nullable)port path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {
@@ -89,7 +73,7 @@
 }
 
 + (NSString *_Nullable)routerUrlWithHost:(NSString *_Nonnull)host port:(NSString *_Nullable)port path:(NSString *_Nullable)path params:(NSDictionary * _Nullable)params {
-    return [[self sharedInstance] routerUrlWithHost:host port:port path:path params:params];
+    return [self.sharedInstance routerUrlWithHost:host port:port path:path params:params];
 }
 
 - (NSString *_Nullable)routerUrlWithHost:(NSString *_Nonnull)host port:(NSString *_Nullable)port path:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock {
@@ -102,7 +86,7 @@
 }
 
 + (NSString *_Nullable)routerUrlWithHost:(NSString *_Nonnull)host port:(NSString *_Nullable)port path:(NSString *_Nullable)path paramsBlock:(AMKRouterParamsBlock)paramsBlock {
-    return [[self sharedInstance] routerUrlWithHost:host port:port path:path paramsBlock:paramsBlock];
+    return [self.sharedInstance routerUrlWithHost:host port:port path:path paramsBlock:paramsBlock];
 }
 
 - (NSString *_Nullable)routerUrlInString:(NSString *_Nonnull)string {
@@ -110,7 +94,7 @@
 }
 
 + (NSString *_Nullable)routerUrlInString:(NSString *_Nonnull)string {
-    return [[self sharedInstance] routerUrlInString:string];
+    return [self.sharedInstance routerUrlInString:string];
 }
 
 - (NSString *_Nullable)routerUrlInString:(NSString *_Nonnull)string appendParams:(NSDictionary * _Nullable)params {
@@ -125,7 +109,7 @@
 }
 
 + (NSString *_Nullable)routerUrlInString:(NSString *_Nonnull)string appendParams:(NSDictionary * _Nullable)params {
-    return [[self sharedInstance] routerUrlInString:string appendParams:params];
+    return [self.sharedInstance routerUrlInString:string appendParams:params];
 }
 
 - (NSString *_Nullable)routerUrlInString:(NSString *_Nonnull)string appendParamsBlock:(AMKRouterParamsBlock)paramsBlock {
@@ -138,7 +122,7 @@
 }
 
 + (NSString *_Nullable)routerUrlInString:(NSString *_Nonnull)string appendParamsBlock:(AMKRouterParamsBlock)paramsBlock {
-    return [[self sharedInstance] routerUrlInString:string appendParamsBlock:paramsBlock];
+    return [self.sharedInstance routerUrlInString:string appendParamsBlock:paramsBlock];
 }
 
 - (BOOL)addRouter:(NSString *_Nonnull)routingPattern name:(NSString *)name forTarget:(NSString *_Nonnull)targetName action:(NSString *_Nonnull)actionName defaults:(NSDictionary *_Nullable)defaults shouldCacheTarget:(BOOL)shouldCacheTarget error:(NSError *_Nullable *_Nullable)error {
@@ -155,7 +139,7 @@
         dispatcherInfo[AMKRouterDispatcherShouldCacheTargetParamKey] = @(shouldCacheTarget);
         
         // 补全路由规则
-        routingPattern = [routingPattern amk_urlByCompletingRouteWithScheme:self.scheme];
+        routingPattern = [routingPattern amkrp_urlByCompletingRouteWithScheme:self.scheme];
         
         // 参数有效性校验
         AMKRouterErrorCode errorCode = AMKRouterSuccessErrorCode;
@@ -174,7 +158,7 @@
         
         // 生成Error
         if (errorCode != AMKRouterSuccessErrorCode) {
-            error!=nil ? *error = [NSError amk_routerErrorWithCode:errorCode userInfoBlock:^(NSMutableDictionary * _Nonnull userInfo) {
+            error!=nil ? *error = [NSError amkrp_routerErrorWithCode:errorCode userInfoBlock:^(NSMutableDictionary * _Nonnull userInfo) {
                 userInfo[AMKRouterUrlPatternParamKey] = routingPattern?:@"";
                 userInfo[AMKRouterUrlDispatcherParamKey] = dispatcherInfo;
             }] : nil;
@@ -193,7 +177,7 @@
 }
 
 + (BOOL)addRouter:(NSString *_Nonnull)routingPattern name:(NSString *)name forTarget:(NSString *_Nonnull)targetName action:(NSString *_Nonnull)actionName defaults:(NSDictionary *_Nullable)defaults shouldCacheTarget:(BOOL)shouldCacheTarget error:(NSError *_Nullable *_Nullable)error {
-    return [[self sharedInstance] addRouter:routingPattern name:name forTarget:targetName action:actionName defaults:defaults shouldCacheTarget:shouldCacheTarget error:error];
+    return [self.sharedInstance addRouter:routingPattern name:name forTarget:targetName action:actionName defaults:defaults shouldCacheTarget:shouldCacheTarget error:error];
 }
 
 - (BOOL)addRouter:(NSString *_Nonnull)routingPattern name:(NSString *)name forTarget:(NSString *_Nonnull)targetName action:(NSString *_Nonnull)actionName defaults:(NSDictionary *_Nullable)defaults shouldCacheTarget:(BOOL)shouldCacheTarget errorBlock:(AMKRouterErrorBlock)errorBlock {
@@ -204,7 +188,7 @@
 }
 
 + (BOOL)addRouter:(NSString *_Nonnull)routingPattern name:(NSString *)name forTarget:(NSString *_Nonnull)targetName action:(NSString *_Nonnull)actionName defaults:(NSDictionary *_Nullable)defaults shouldCacheTarget:(BOOL)shouldCacheTarget errorBlock:(AMKRouterErrorBlock)errorBlock {
-    return [[self sharedInstance] addRouter:routingPattern name:name forTarget:targetName action:actionName defaults:defaults shouldCacheTarget:shouldCacheTarget errorBlock:errorBlock];
+    return [self.sharedInstance addRouter:routingPattern name:name forTarget:targetName action:actionName defaults:defaults shouldCacheTarget:shouldCacheTarget errorBlock:errorBlock];
 }
 
 - (BOOL)addRouterWithHost:(NSString *_Nullable)host path:(NSString *_Nonnull)pathPattern name:(NSString *)name forTarget:(NSString *_Nonnull)targetName action:(NSString *_Nonnull)actionName defaults:(NSDictionary *_Nullable)defaults shouldCacheTarget:(BOOL)shouldCacheTarget error:(NSError *_Nullable *_Nullable)error {
@@ -229,7 +213,7 @@
         
         // 错误信息
         if (errorCode != AMKRouterSuccessErrorCode) {
-            error!=nil ? *error = [NSError amk_routerErrorWithCode:errorCode userInfoBlock:^(NSMutableDictionary * _Nonnull userInfo) {
+            error!=nil ? *error = [NSError amkrp_routerErrorWithCode:errorCode userInfoBlock:^(NSMutableDictionary * _Nonnull userInfo) {
                 userInfo[AMKRouterUrlHostParamKey] = host?:@"";
                 userInfo[AMKRouterUrlPathParamKey] = pathPattern?:@"";
                 userInfo[AMKRouterUrlDispatcherParamKey] = dispatcherInfo;
@@ -244,7 +228,7 @@
 }
 
 + (BOOL)addRouterWithHost:(NSString *_Nullable)host path:(NSString *_Nonnull)pathPattern name:(NSString *)name forTarget:(NSString *_Nonnull)targetName action:(NSString *_Nonnull)actionName defaults:(NSDictionary *_Nullable)defaults shouldCacheTarget:(BOOL)shouldCacheTarget error:(NSError *_Nullable *_Nullable)error {
-    return [[self sharedInstance] addRouterWithHost:host path:pathPattern name:name forTarget:targetName action:actionName defaults:defaults shouldCacheTarget:shouldCacheTarget error:error];
+    return [self.sharedInstance addRouterWithHost:host path:pathPattern name:name forTarget:targetName action:actionName defaults:defaults shouldCacheTarget:shouldCacheTarget error:error];
 }
 
 - (BOOL)addRouterWithHost:(NSString *_Nullable)host path:(NSString *_Nonnull)pathPattern name:(NSString *)name forTarget:(NSString *_Nonnull)targetName action:(NSString *_Nonnull)actionName defaults:(NSDictionary *_Nullable)defaults shouldCacheTarget:(BOOL)shouldCacheTarget errorBlock:(AMKRouterErrorBlock)errorBlock {
@@ -255,13 +239,13 @@
 }
 
 + (BOOL)addRouterWithHost:(NSString *_Nullable)host path:(NSString *_Nonnull)pathPattern name:(NSString *)name forTarget:(NSString *_Nonnull)targetName action:(NSString *_Nonnull)actionName defaults:(NSDictionary *_Nullable)defaults shouldCacheTarget:(BOOL)shouldCacheTarget errorBlock:(AMKRouterErrorBlock)errorBlock {
-    return [[self sharedInstance] addRouterWithHost:host path:pathPattern name:name forTarget:targetName action:actionName defaults:defaults shouldCacheTarget:shouldCacheTarget errorBlock:errorBlock];
+    return [self.sharedInstance addRouterWithHost:host path:pathPattern name:name forTarget:targetName action:actionName defaults:defaults shouldCacheTarget:shouldCacheTarget errorBlock:errorBlock];
 }
 
 - (BOOL)removeRouter:(NSString *_Nonnull)routingPattern error:(NSError *_Nullable *_Nullable)error {
     if (!(error?*error:nil)) {
         // 补全路由规则
-        routingPattern = [routingPattern amk_urlByCompletingRouteWithScheme:self.scheme];
+        routingPattern = [routingPattern amkrp_urlByCompletingRouteWithScheme:self.scheme];
         
         // 移除路由规则
         [(NSMutableDictionary *)self.routingTable removeObjectForKey:routingPattern];
@@ -274,7 +258,7 @@
 }
 
 + (BOOL)removeRouter:(NSString *_Nonnull)routingPattern error:(NSError *_Nullable *_Nullable)error {
-    return [[self sharedInstance] removeRouter:routingPattern error:error];
+    return [self.sharedInstance removeRouter:routingPattern error:error];
 }
 
 - (BOOL)removeRouter:(NSString *_Nonnull)routingPattern errorBlock:(AMKRouterErrorBlock)errorBlock {
@@ -285,7 +269,7 @@
 }
 
 + (BOOL)removeRouter:(NSString *_Nonnull)routingPattern errorBlock:(AMKRouterErrorBlock)errorBlock {
-    return [[self sharedInstance] removeRouter:routingPattern errorBlock:errorBlock];
+    return [self.sharedInstance removeRouter:routingPattern errorBlock:errorBlock];
 }
 
 - (BOOL)respondsToRouterUrl:(NSString *_Nullable)routerUrl error:(NSError *_Nullable *_Nullable)error {
@@ -298,7 +282,7 @@
     BOOL respondsToRouterUrl = YES;
     if (!(error?*error:nil) && (!routerUrl || ![routerUrl isKindOfClass:NSString.class] || ![routerUrl hasPrefix:routerUrlPrefix])) {
         respondsToRouterUrl = NO;
-        error!=nil ? *error = [NSError amk_routerErrorWithCode:AMKRouterInvalidSchemeErrorCode userInfoBlock:nil] : nil;
+        error!=nil ? *error = [NSError amkrp_routerErrorWithCode:AMKRouterInvalidSchemeErrorCode userInfoBlock:nil] : nil;
     }
     
     // Debug信息
@@ -308,7 +292,7 @@
 }
 
 + (BOOL)respondsToRouterUrl:(NSString *_Nullable)routerUrl error:(NSError *_Nullable *_Nullable)error {
-    return [[self sharedInstance] respondsToRouterUrl:routerUrl error:error];
+    return [self.sharedInstance respondsToRouterUrl:routerUrl error:error];
 }
 
 - (BOOL)respondsToRouterUrl:(NSString *_Nullable)routerUrl errorBlock:(AMKRouterErrorBlock)errorBlock {
@@ -319,7 +303,7 @@
 }
 
 + (BOOL)respondsToRouterUrl:(NSString *_Nullable)routerUrl errorBlock:(AMKRouterErrorBlock)errorBlock {
-    return [[self sharedInstance] respondsToRouterUrl:routerUrl errorBlock:errorBlock];
+    return [self.sharedInstance respondsToRouterUrl:routerUrl errorBlock:errorBlock];
 }
 
 - (id _Nullable)performRouterUrl:(NSString * _Nullable)routerUrl params:(NSDictionary * _Nullable)params error:(NSError * _Nullable * _Nullable)error {
@@ -360,7 +344,7 @@
 }
 
 + (id _Nullable)performRouterUrl:(NSString * _Nullable)routerUrl params:(NSDictionary * _Nullable)params error:(NSError * _Nullable * _Nullable)error {
-    return [[self sharedInstance] performRouterUrl:routerUrl params:params error:error];
+    return [self.sharedInstance performRouterUrl:routerUrl params:params error:error];
 }
 
 - (id _Nullable)performRouterUrl:(NSString * _Nullable)routerUrl params:(NSDictionary * _Nullable)params errorBlock:(AMKRouterErrorBlock)errorBlock {
@@ -371,7 +355,7 @@
 }
 
 + (id _Nullable)performRouterUrl:(NSString * _Nullable)routerUrl params:(NSDictionary * _Nullable)params errorBlock:(AMKRouterErrorBlock)errorBlock {
-    return [[self sharedInstance] performRouterUrl:routerUrl params:params errorBlock:errorBlock];
+    return [self.sharedInstance performRouterUrl:routerUrl params:params errorBlock:errorBlock];
 }
 
 - (id _Nullable)performRouterUrl:(NSString * _Nullable)routerUrl paramsBlock:(AMKRouterParamsBlock)paramsBlock error:(NSError * _Nullable * _Nullable)error {
@@ -384,7 +368,7 @@
 }
 
 + (id _Nullable)performRouterUrl:(NSString * _Nullable)routerUrl paramsBlock:(AMKRouterParamsBlock)paramsBlock error:(NSError * _Nullable * _Nullable)error {
-    return [[self sharedInstance] performRouterUrl:routerUrl paramsBlock:paramsBlock error:error];
+    return [self.sharedInstance performRouterUrl:routerUrl paramsBlock:paramsBlock error:error];
 }
 
 - (id _Nullable)performRouterUrl:(NSString * _Nullable)routerUrl paramsBlock:(AMKRouterParamsBlock)paramsBlock errorBlock:(AMKRouterErrorBlock)errorBlock {
@@ -395,7 +379,7 @@
 }
 
 + (id _Nullable)performRouterUrl:(NSString * _Nullable)routerUrl paramsBlock:(AMKRouterParamsBlock)paramsBlock errorBlock:(AMKRouterErrorBlock)errorBlock {
-    return [[self sharedInstance] performRouterUrl:routerUrl paramsBlock:paramsBlock errorBlock:errorBlock];;
+    return [self.sharedInstance performRouterUrl:routerUrl paramsBlock:paramsBlock errorBlock:errorBlock];;
 }
 
 #pragma mark - Private Methods
@@ -428,7 +412,7 @@
     NSArray<NSString *> *hostPath = [hostPathStr componentsSeparatedByString:@"/"];
     routerUrlParams[AMKRouterUrlHostParamKey] = hostPath.count>0 ? hostPath.firstObject : hostPathStr;
     routerUrlParams[AMKRouterUrlPathComponentsParamKey] = hostPath.count>0 ? [hostPath subarrayWithRange:NSMakeRange(1, hostPath.count-1)] : [NSArray array];
-    routerUrlParams[AMKRouterUrlParamsParamKey] = (schemaHostPathParams.count > 1 ? [schemaHostPathParams objectAtIndex:1].amk_paramsForRouteQuery : @{}).mutableCopy;
+    routerUrlParams[AMKRouterUrlParamsParamKey] = (schemaHostPathParams.count > 1 ? [[schemaHostPathParams objectAtIndex:1] amkru_paramsForRouteQuery] : @{}).mutableCopy;
     if (params && [params isKindOfClass:NSDictionary.class] && params.count) {
         [routerUrlParams[AMKRouterUrlParamsParamKey] addEntriesFromDictionary:params];
     }
@@ -442,52 +426,3 @@
 }
 
 @end
-
-#pragma mark -
-
-NSString * _Nonnull const AMKRouterErrorDomain = @"com.andy.amkits.router.error";
-
-AMKRouterErrorCode AMKRouterSuccessErrorCode = 0;                               //!< 路由错误状态码：成功
-AMKRouterErrorCode AMKRouterInvalidPatternErrorCode = 1;                        //!< 路由错误状态码：路由规则不合法
-AMKRouterErrorCode AMKRouterExistedPatternErrorCode = 2;                        //!< 路由错误状态码：路由规则已存在
-AMKRouterErrorCode AMKRouterInvalidTatgetErrorCode = 5;                         //!< 路由错误状态码：Target不合法
-AMKRouterErrorCode AMKRouterInvalidActionErrorCode = 6;                         //!< 路由错误状态码：Action不合法
-AMKRouterErrorCode AMKRouterInvalidSchemeErrorCode = 3;                         //!< 路由错误状态码：Scheme不合法
-AMKRouterErrorCode AMKRouterInvalidHostErrorCode = 7;                           //!< 路由错误状态码：Host不合法
-AMKRouterErrorCode AMKRouterInvalidPathErrorCode = 8;                           //!< 路由错误状态码：Path不合法
-AMKRouterErrorCode AMKRouterUnknowErrorCode = NSNotFound;                       //!< 路由错误状态码：未知错误
-
-NSString * _Nullable AMKLocalizedDescriptionFromRouterErrorCode(AMKRouterErrorCode errorCode) {
-    NSString *localizedDescription = nil;
-    if (errorCode == AMKRouterSuccessErrorCode) localizedDescription = @"成功";
-    else if (errorCode == AMKRouterInvalidPatternErrorCode) localizedDescription = @"路由规则不合法";
-    else if (errorCode == AMKRouterExistedPatternErrorCode) localizedDescription = @"路由规则已存在";
-    else if (errorCode == AMKRouterInvalidTatgetErrorCode) localizedDescription = @"Target不合法";
-    else if (errorCode == AMKRouterInvalidActionErrorCode) localizedDescription = @"Action不合法";
-    else if (errorCode == AMKRouterInvalidSchemeErrorCode) localizedDescription = @"Scheme不合法";
-    else if (errorCode == AMKRouterInvalidHostErrorCode) localizedDescription = @"Host不合法";
-    else if (errorCode == AMKRouterInvalidPathErrorCode) localizedDescription = @"Path不合法";
-    else localizedDescription = [NSString stringWithFormat:@"未知错误(%ld)", errorCode];
-    return localizedDescription;
-}
-
-AMKRouterParamKey const AMKRouterUrlStringParamKey = @"__urlString";
-AMKRouterParamKey const AMKRouterUrlPatternParamKey = @"__urlPattern";
-AMKRouterParamKey const AMKRouterUrlSchemeParamKey = @"__urlScheme";
-AMKRouterParamKey const AMKRouterUrlHostParamKey = @"__urlHost";
-AMKRouterParamKey const AMKRouterUrlPathParamKey = @"__urlPath";
-AMKRouterParamKey const AMKRouterUrlPathComponentsParamKey = @"__urlPathComponents";
-AMKRouterParamKey const AMKRouterUrlParamsParamKey = @"__urlParams";
-AMKRouterParamKey const AMKRouterUrlDispatcherParamKey = @"__urlDispatcher";
-
-AMKRouterDispatcherParamKey const AMKRouterDispatcherNameParamKey = @"name";
-AMKRouterDispatcherParamKey const AMKRouterDispatcherTargetParamKey = @"target";
-AMKRouterDispatcherParamKey const AMKRouterDispatcherActionParamKey = @"action";
-AMKRouterDispatcherParamKey const AMKRouterDispatcherDefaultsParamKey = @"defaults";
-AMKRouterDispatcherParamKey const AMKRouterDispatcherCompletionBlockParamKey = @"completionBlock";
-AMKRouterDispatcherParamKey const AMKRouterDispatcherShouldCacheTargetParamKey = @"shouldCacheTarget";
-
-AMKRouterErrorBlock AMKRouterDefaultErrorBlock = ^(AMKRouter *router, NSError *error) {
-    if (!error) return;
-    NSLog(@"❌ 路由加载失败：%@ %@", error.localizedDescription, error.userInfo);
-};

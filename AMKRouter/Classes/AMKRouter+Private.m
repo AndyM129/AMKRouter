@@ -9,9 +9,9 @@
 
 #pragma mark - NSError
 
-@implementation NSError (AMKRouter)
+@implementation NSError (AMKRouterPrivate)
 
-+ (instancetype)amk_routerErrorWithCode:(NSInteger)code userInfoBlock:(void(^_Nullable)(NSMutableDictionary * _Nonnull userInfo))userInfoBlock {
++ (instancetype)amkrp_routerErrorWithCode:(NSInteger)code userInfoBlock:(void(^_Nullable)(NSMutableDictionary * _Nonnull userInfo))userInfoBlock {
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
     
     // 错误描述
@@ -32,9 +32,9 @@
 
 #pragma mark - NSString
 
-@implementation NSString (AMKRouter)
+@implementation NSString (AMKRouterPrivate)
 
-- (NSString *_Nonnull)amk_urlByCompletingRouteWithScheme:(NSString *)scheme {
+- (NSString *_Nonnull)amkrp_urlByCompletingRouteWithScheme:(NSString *)scheme {
     // 若路由完整，则直接返回，如 aa://aaa/bb/cc
     if ([self containsString:@"://"]) {
         return self;
@@ -53,28 +53,6 @@
     }
     // host/path1/path2
     return [NSString stringWithFormat:@"%@://%@", scheme, self];;
-}
-
-- (NSDictionary<NSString *, NSString *> * _Nullable)amk_paramsForRouteQuery {
-    NSMutableDictionary<NSString *, NSString *> *queryParams = [NSMutableDictionary dictionary];
-    if (self.length) {
-        NSArray *queryComponents = [self componentsSeparatedByString:@"&"];
-        for (NSString *queryComponent in queryComponents) {
-            if (!queryComponent.length) continue;
-            
-            NSString *key = @"";
-            NSString *value = @"";
-            NSRange range = [queryComponent rangeOfString:@"="];
-            if (range.location != NSNotFound) {
-                key = [queryComponent substringToIndex:range.location];
-                value = [queryComponent substringFromIndex:range.location+range.length];
-            } else {
-                key = queryComponent;
-            }
-            [queryParams setObject:value forKey:key];
-        }
-    }
-    return queryParams;
 }
 
 @end

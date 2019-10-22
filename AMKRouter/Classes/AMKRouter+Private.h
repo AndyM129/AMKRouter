@@ -9,20 +9,18 @@
 
 #pragma mark - NSError
 
-@interface NSError (AMKRouter)
+@interface NSError (AMKRouterPrivate)
 
-+ (instancetype)amk_routerErrorWithCode:(NSInteger)code userInfoBlock:(void(^_Nullable)(NSMutableDictionary * _Nonnull userInfo))userInfoBlock;
+/** 根据错误码、自定义信息 创建Error 对象  */
++ (instancetype _Nullable)amkrp_routerErrorWithCode:(NSInteger)code userInfoBlock:(void(^_Nullable)(NSMutableDictionary * _Nonnull userInfo))userInfoBlock;
 
 @end
 
 #pragma mark - NSString
 
-@interface NSString (AMKRouter)
+@interface NSString (AMKRouterPrivate)
 
 /** 补全路由处理 */
-- (NSString *_Nonnull)amk_urlByCompletingRouteWithScheme:(NSString *)scheme;
-
-/** 路由参数 */
-- (NSDictionary<NSString *, NSString *> * _Nullable)amk_paramsForRouteQuery;
+- (NSString *_Nonnull)amkrp_urlByCompletingRouteWithScheme:(NSString *_Nonnull)scheme;
 
 @end
